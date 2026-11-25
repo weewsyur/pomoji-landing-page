@@ -1,0 +1,45 @@
+import { useId } from "react";
+import { cn } from "../utils/cn";
+
+/** The PomoJI "P" mark, drawn as inline SVG (no extra asset request). */
+export function LogoMark({ className = "h-9 w-9" }: { className?: string }) {
+  const id = useId();
+  return (
+    <svg viewBox="0 0 64 64" className={className} aria-hidden="true" focusable="false">
+      <defs>
+        <linearGradient id={id} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#F58253" />
+          <stop offset=".55" stopColor="#EA4F2B" />
+          <stop offset="1" stopColor="#C9391C" />
+        </linearGradient>
+      </defs>
+      <circle cx="32" cy="32" r="32" fill={`url(#${id})`} />
+      <path
+        d="M24 14h14a11 11 0 0 1 0 22h-6v6c0 4-3 7-7 7h-1z"
+        fill="#F7B79B"
+        transform="translate(3 2)"
+      />
+      <path
+        d="M22 14h14a10 10 0 0 1 0 20h-6v5c0 4-3 7-7 7h-1zm8 7v6h5a3 3 0 0 0 0-6z"
+        fill="#fff"
+        fillRule="evenodd"
+      />
+    </svg>
+  );
+}
+
+export function Logo({ className, light = false }: { className?: string; light?: boolean }) {
+  return (
+    <span className={cn("inline-flex items-center gap-2.5", className)}>
+      <LogoMark />
+      <span
+        className={cn(
+          "text-xl font-extrabold tracking-tight",
+          light ? "text-white" : "text-ink"
+        )}
+      >
+        PomoJI
+      </span>
+    </span>
+  );
+}
